@@ -1,0 +1,295 @@
+/* Reset default margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styles */
+html {
+  background-color: #e4e9fd;
+  background-image: -webkit-linear-gradient(65deg, #a683e3 50%, #e4e9fd 50%);
+  min-height: 1000px;
+  font-family: "Helvetica Neue", Helvetica, Arial;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  min-height: 95vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header styles */
+header {
+  background-color: #00204a;
+  color: white;
+  padding: 10px 0;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+/* Main styles */
+main {
+  text-align: center;
+  flex: 1 0 auto;
+}
+
+/* Box container styles */
+.box {
+  max-width: 800px;
+  margin: 50px auto;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+}
+
+#heading {
+  background-color: #a683e3;
+  text-align: center;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+/* Task day styles */
+.day {
+  margin-bottom: 20px;
+}
+
+.day h2 {
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+}
+
+/* Task item styles */
+.task {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f1f1f1;
+  padding: 10px;
+}
+
+.task:last-child {
+  border-bottom: 0;
+}
+
+input[type="checkbox"] {
+  margin: 20px;
+  margin-left: 0;
+}
+
+p {
+  margin: 0;
+  padding: 20px 0;
+  font-size: 20px;
+  color: #00204a;
+  flex: 1;
+  text-align: left;
+}
+
+/* Form styles */
+form.task {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  justify-content: space-around;
+  margin-top: 20px; /* Ensure spacing between last task and add new task */
+  border-top: 1px solid #f1f1f1;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="time"] {
+  text-align: left;
+  height: 40px;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  font-weight: 200;
+  width: auto;
+  flex: 1;
+  margin-right: 10px;
+  padding: 0 10px;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus {
+  outline: none;
+  box-shadow: inset 0 -3px 0 0 #a683e3;
+}
+
+button {
+  padding: 10px;
+  border: none;
+  background: #a683e3;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button.add {
+  min-height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+button.add:hover {
+  background: #7d5ac9;
+}
+
+button.edit {
+  background: #00204a;
+}
+
+button.edit img.icon {
+  width: 20px;
+  height: 20px;
+}
+
+button.edit:hover {
+  background: #003366;
+}
+
+button.edit[hidden] {
+  display: none;
+}
+
+/* Past task styles */
+.past-task p {
+  color: red;
+}
+
+/* Footer styles */
+footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #00204a;
+  color: white;
+}
+
+/* Media queries for responsive design */
+
+/* Small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+  .box {
+    margin: 10px;
+    padding: 15px;
+    max-width: calc(100% - 20px);
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="time"] {
+    font-size: 16px;
+    height: 35px;
+  }
+
+  button {
+    padding: 8px;
+    font-size: 14px;
+  }
+}
+
+/* Medium devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .box {
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="time"] {
+    font-size: 18px;
+  }
+
+  button {
+    padding: 10px;
+    font-size: 16px;
+  }
+}
+
+/* Large devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .box {
+    margin: 30px auto;
+    padding: 25px;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="time"] {
+    font-size: 20px;
+  }
+
+  button {
+    padding: 12px;
+    font-size: 18px;
+  }
+}
+
+/* Extra large devices (laptops/desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .box {
+    margin: 40px auto;
+    padding: 30px;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="time"] {
+    font-size: 22px;
+  }
+
+  button {
+    padding: 14px;
+    font-size: 20px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .box {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 35px;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  input[type="time"] {
+    font-size: 24px;
+  }
+
+  button {
+    padding: 16px;
+    font-size: 22px;
+  }
+}
+
+/* Fix for small screens where icons are not visible */
+@media (max-width: 374px) and (max-height: 408px) {
+  form.task input[type="date"],
+  form.task input[type="time"] {
+    display: inline-block;
+    width: 40%;
+  }
+
+  form.task button.add {
+    margin-left: 5px;
+  }
+}

@@ -1,0 +1,77 @@
+<%- include('partials/header.ejs'); -%>
+
+<div class="box" id="heading">
+  <h1><%= listTitle %></h1>
+</div>
+
+<div class="box">
+  <% let currentDate = null; %>
+  <% const now = new Date(); %>
+  <% for(let task of listTasks) { %>
+    <% const taskDate = new Date(task.due_date).toLocaleDateString(); %>
+    <% const taskDateStr = new Date(task.due_date).toISOString().substring(0, 10); %>
+    <% const taskDateTimeStr = `${taskDateStr}T${task.due_time}`; %>
+    <% const taskDateTime = new Date(taskDateTimeStr); %>
+    <% if (taskDate !== currentDate) { %>
+      <% if (currentDate !== null) { %>
+        </div> <!-- Close previous day's tasks -->
+      <% } %>
+      <div class="day">
+        <h2><%= taskDate %></h2>
+    <% } %>
+
+    <div class="task <%= taskDateTime < now ? 'past-task' : '' %>">
+      <form action="/delete" method="post">
+        <input type="checkbox" onchange="this.form.submit()" name="deleteTaskId" value="<%= task.id %>">
+      </form>
+
+      <p id="title<%=task.id%>">
+        <%= task.title %> - <%= task.due_time %>
+      </p>
+
+      <form class="edit" action="/edit" method="post" onsubmit="return validateDateTime(this)">
+        <input type="hidden" name="updatedTaskId" value="<%= task.id %>">
+        <input id="input<%=task.id%>" type="text" name="updatedTaskTitle" value="<%= task.title %>" autocomplete="off" hidden="true" />
+        <input type="date" name="updatedDueDate" id="date<%=task.id%>" value="<%= taskDateStr %>" hidden="true" />
+        <input type="time" name="updatedDueTime" id="time<%=task.id%>" value="<%= task.due_time %>" hidden="true" />
+        <button id="done<%=task.id%>" class="edit" type="submit" hidden><img class="icon" src="/assets/icons/check-solid.svg" alt="tick image"></button>
+      </form>
+      <button id="edit<%=task.id%>" class="edit" onclick="handler('<%=task.id%>')"><img class="icon" src="/assets/icons/pencil-solid.svg" alt="pencil image"></button>      
+    </div>
+
+    <% currentDate = taskDate; %>
+  <% } %>
+  <!-- Close last day's tasks -->
+   <!-- Add New Task form -->
+  <form class="task" action="/add" method="post" onsubmit="return validateDateTime(this)">
+    <input type="text" name="newTask" placeholder="Add New Task" autocomplete="off" required />
+    <input type="date" name="due_date" required />
+    <input type="time" name="due_time" required /> <!-- Add input for due_time -->
+    <button class="add" type="submit">+</button>
+  </form>
+  </div> 
+  <script>
+    function validateDateTime(form) {
+      const currentDate = new Date();
+      const dueDate = new Date(form.updatedDueDate.value + 'T' + form.updatedDueTime.value);
+  
+      if (dueDate <= currentDate) {
+        alert("Please enter a future date and time.");
+        return false;
+      }
+      return true;
+    }
+  
+    function handler(id) {
+      document.getElementById("title" + id).setAttribute("hidden", true);
+      document.getElementById("edit" + id).setAttribute("hidden", true);
+      document.getElementById("done" + id).removeAttribute("hidden");
+      document.getElementById("input" + id).removeAttribute("hidden");
+      document.getElementById("date" + id).removeAttribute("hidden");
+      document.getElementById("time" + id).removeAttribute("hidden");
+    }
+  </script>
+  
+</div>
+
+<%- include('partials/footer.ejs'); -%>
